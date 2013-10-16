@@ -30,15 +30,6 @@
 
 @implementation CustomBadge
 
-@synthesize badgeText;
-@synthesize badgeTextColor;
-@synthesize badgeInsetColor;
-@synthesize badgeFrameColor;
-@synthesize badgeFrame;
-@synthesize badgeCornerRoundness;
-@synthesize badgeScaleFactor;
-@synthesize badgeShining;
-
 // I recommend to use the allocator customBadgeWithString
 - (id) initWithString:(NSString *)badgeString withScale:(CGFloat)scale withShining:(BOOL)shining
 {
@@ -90,9 +81,9 @@
 	if ([badgeString length]>=2) {
 		flexSpace = [badgeString length];
 		rectWidth = 25 + (stringSize.width + flexSpace); rectHeight = 25;
-		retValue = CGSizeMake(rectWidth*badgeScaleFactor, rectHeight*badgeScaleFactor);
+		retValue = CGSizeMake(rectWidth*_badgeScaleFactor, rectHeight*_badgeScaleFactor);
 	} else {
-		retValue = CGSizeMake(25*badgeScaleFactor, 25*badgeScaleFactor);
+		retValue = CGSizeMake(25*_badgeScaleFactor, 25*_badgeScaleFactor);
 	}
 	self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, retValue.width, retValue.height);
 	self.badgeText = badgeString;
@@ -226,8 +217,8 @@
 	}
 	
 	if ([self.badgeText length]>0) {
-		[badgeTextColor set];
-		CGFloat sizeOfFont = 13.5*badgeScaleFactor;
+		[_badgeTextColor set];
+		CGFloat sizeOfFont = 13.5*_badgeScaleFactor;
 		if ([self.badgeText length]<2) {
 			sizeOfFont += sizeOfFont*0.20;
 		}
